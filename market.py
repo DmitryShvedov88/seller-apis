@@ -10,7 +10,7 @@ from seller import divide, price_conversion
 logger = logging.getLogger(__file__)
 
 
-def get_product_list(page, campaign_id, access_token):
+def get_product_list(page, campaign_id, access_token)-> dict:
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ def get_product_list(page, campaign_id, access_token):
     return response_object.get("result")
 
 
-def update_stocks(stocks, campaign_id, access_token):
+def update_stocks(stocks, campaign_id, access_token)-> dict:
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -45,7 +45,7 @@ def update_stocks(stocks, campaign_id, access_token):
     return response_object
 
 
-def update_price(prices, campaign_id, access_token):
+def update_price(prices, campaign_id, access_token)-> dict:
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -61,7 +61,7 @@ def update_price(prices, campaign_id, access_token):
     return response_object
 
 
-def get_offer_ids(campaign_id, market_token):
+def get_offer_ids(campaign_id, market_token)-> list:
     """Получить артикулы товаров Яндекс маркета"""
     page = ""
     product_list = []
@@ -77,7 +77,7 @@ def get_offer_ids(campaign_id, market_token):
     return offer_ids
 
 
-def create_stocks(watch_remnants, offer_ids, warehouse_id):
+def create_stocks(watch_remnants, offer_ids, warehouse_id)-> list:
     # Уберем то, что не загружено в market
     stocks = list()
     date = str(datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z")
@@ -122,7 +122,7 @@ def create_stocks(watch_remnants, offer_ids, warehouse_id):
     return stocks
 
 
-def create_prices(watch_remnants, offer_ids):
+def create_prices(watch_remnants, offer_ids)-> list:
     prices = []
     for watch in watch_remnants:
         if str(watch.get("Код")) in offer_ids:
@@ -142,7 +142,9 @@ def create_prices(watch_remnants, offer_ids):
     return prices
 
 
-async def upload_prices(watch_remnants, campaign_id, market_token):
+async def upload_prices(watch_remnants, campaign_id, market_token)-> list:
+
+
     offer_ids = get_offer_ids(campaign_id, market_token)
     prices = create_prices(watch_remnants, offer_ids)
     for some_prices in list(divide(prices, 500)):
@@ -150,7 +152,24 @@ async def upload_prices(watch_remnants, campaign_id, market_token):
     return prices
 
 
-async def upload_stocks(watch_remnants, campaign_id, market_token, warehouse_id):
+async def upload_stocks(watch_remnants, campaign_id, market_token, warehouse_id)-> tuple:
+    """Upload info in yandex store
+    Args:
+        watch_remnants (list): list of remnants watches.
+        client_id (str): client_id in OZON
+        market_token (str): seller_token in OZON
+        warehouse_id (str): stock id
+    Returns:
+        list: two lists with items in stock and with all items.
+    
+    Raises:
+        BadRequest.
+    
+    Examples:
+        >>> upload_stocks( [{'Model1': 10}, ...],  [{'Model10': 0}, ...], campaign_id, market_token, warehouse_id)
+       
+    """
+
     offer_ids = get_offer_ids(campaign_id, market_token)
     stocks = create_stocks(watch_remnants, offer_ids, warehouse_id)
     for some_stock in list(divide(stocks, 2000)):

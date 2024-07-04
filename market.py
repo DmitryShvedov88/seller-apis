@@ -11,6 +11,20 @@ logger = logging.getLogger(__file__)
 
 
 def get_product_list(page, campaign_id, access_token)-> dict:
+    """Get a list of Yandex store products
+    Args:
+        page (str): page ID
+        campaign_id (str): client_id in Yandex
+        access_token (str): seller_token in Yandex
+
+    Returns:
+        dict: list of products
+
+    Examples:
+          >>> get_product_list("", client_id, seller_token)
+        json file
+    """
+
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -30,6 +44,23 @@ def get_product_list(page, campaign_id, access_token)-> dict:
 
 
 def update_stocks(stocks, campaign_id, access_token)-> dict:
+    """Update balances
+    Args:
+        stocks (list): list of products to update on the site Yandex
+        client_id (str): client_id in Yandex
+        access_token (str): seller_token in Yandex
+
+    Returns:
+        dict: JSON file
+
+    Raises:
+        HTTPError: If the API call fails.
+
+    Examples:
+         >>> update_stocks("client_id_55", "seller_token_55")
+          json
+    """
+    
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -46,6 +77,23 @@ def update_stocks(stocks, campaign_id, access_token)-> dict:
 
 
 def update_price(prices, campaign_id, access_token)-> dict:
+    """update watch price
+    Args:
+        prices (str): prices in Yandex
+        client_id (str): client_id in Yandex
+        seller_token (str): seller_token in Yandex
+
+    Returns:
+        dict: list of items from the Yandex store
+    
+    Raises:
+        HTTPError: If the API call fails.        
+
+    Examples:
+         >>> update_price([{'offer_id': '00001', 'Model1': 10}, ...], "client_id_55", "seller_token_55")
+        {"status": "success", "message": "Stocks updated successfully"}
+    """
+    
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
         "Content-Type": "application/json",
@@ -62,7 +110,19 @@ def update_price(prices, campaign_id, access_token)-> dict:
 
 
 def get_offer_ids(campaign_id, market_token)-> list:
-    """Получить артикулы товаров Яндекс маркета"""
+    """Get article numbers for ozone store products
+    Args:
+        client_id (str): client_id in Yandex
+        market_token (str): seller_token in Yandex
+
+    Returns:
+        list: list of items from the Yandex store
+
+    Examples:
+         >>> get_offer_ids("client_id_55", "seller_token_55")
+        ['00001', '00002', ...]
+    """
+
     page = ""
     product_list = []
     while True:
@@ -78,7 +138,21 @@ def get_offer_ids(campaign_id, market_token)-> list:
 
 
 def create_stocks(watch_remnants, offer_ids, warehouse_id)-> list:
-    # Уберем то, что не загружено в market
+    """
+    The function creates a list of products to update on the site Yandex
+
+    Args:
+        watch_remnants (list): list of remnants watches.
+        offer_ids (list): list of article numbers.
+        warehouse_id (str): stock ID.
+    Returns:
+        list: list of remnants watches to update in OZON storage.
+
+    Examples:
+        >>> create_stocks([{Model1: 10}, {Model_F: 50}, ...], ['00001', '00002', ...])
+        [{'offer_id': '00001', 'Model1': 10}, ...]
+    """
+    
     stocks = list()
     date = str(datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z")
     for watch in watch_remnants:
@@ -123,6 +197,21 @@ def create_stocks(watch_remnants, offer_ids, warehouse_id)-> list:
 
 
 def create_prices(watch_remnants, offer_ids)-> list:
+    """
+    This function create list of prices to upload on the site Yandex STORE
+
+    Args:
+        watch_remnants (list): list of remnants watches.
+        offer_ids (list): list of article numbers.
+
+    Returns:
+        list: list of prices watches to update in OZON storage.
+
+    Examples:
+        >>> create_prices([{Model1: 10}, {Model_F: 50}, ...], ['00001', '00002', ...])
+        dict prices
+    """
+
     prices = []
     for watch in watch_remnants:
         if str(watch.get("Код")) in offer_ids:
@@ -142,8 +231,20 @@ def create_prices(watch_remnants, offer_ids)-> list:
     return prices
 
 
-async def upload_prices(watch_remnants, campaign_id, market_token)-> list:
+async def upload_prices(watch_remnants, campaign_id, market_token)-> dict:
+    """upload_prices in Yandex STORE
+    Args:
+        watch_remnants (list): list of remnants watches.
+        client_id (str):  client_id in OZON
+        market_token (str): The seller token for authentication.
 
+    Returns:
+        dict: A dict with prices.
+
+    Example:
+        >>> upload_prices(watch_remnants, "client123", "token123")
+
+    """
 
     offer_ids = get_offer_ids(campaign_id, market_token)
     prices = create_prices(watch_remnants, offer_ids)

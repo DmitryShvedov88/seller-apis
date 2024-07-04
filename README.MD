@@ -41,6 +41,8 @@ market.py requires the following environment variables
 2. Also, to launch you will need an Excel file packed in the ostatki.zip archive. Where information about product balances is contained.
 3. Run the scripts with the following commands:
 
+    MARKET_TOKEN — Yandex.Market API token.
+    FBS_ID — ID of the Yandex Market seller using the FBS system.
     python seller.py
     python marker.py
     

@@ -26,9 +26,9 @@ These programs are designed for the average user and do not require serious know
 
 1. You need to prepare an .ENV file with the following environment variables
 The following environment variables are required for seller.py
-    
-    CLIENT_ID - Ozon marketplace client ID
-    SELLER_TOKEN - API - Ozon Seller key
+
+    CLIENT_ID - Ozon marketplace client ID.
+    SELLER_TOKEN - API - Ozon Seller key.
 
 market.py requires the following environment variables
     
@@ -40,6 +40,6 @@ market.py requires the following environment variables
 
 2. Also, to launch you will need an Excel file packed in the ostatki.zip archive. Where information about product balances is contained.
 3. Run the scripts with the following commands:
-    
+
     python seller.py
     python marker.py

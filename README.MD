@@ -1,10 +1,10 @@
 ## Seller-apis
-We are opening an online store selling watches on the OZONE marketplace on Yandex market.
-Each marketplace has its own market.py files for Yandex and seller.py for OZONE.
+We are opening an online store selling watches on the OZON marketplace on Yandex market.
+Each marketplace has its own market.py files for Yandex and seller.py for OZON.
 
 ### seller.py
 #### Short description
-The script checks balances on the website of the Casio watch online store. Receives articles for the OZONE marketplace. Updates stock and product range. Updates prices according to the offer from the website of the Casio watch supplier, after which it sets prices in our store on the market place.
+The script checks balances on the website of the Casio watch online store. Receives articles for the OZON marketplace. Updates stock and product range. Updates prices according to the offer from the website of the Casio watch supplier, after which it sets prices in our store on the market place.
 #### Script functions
 1. Obtaining a list of SKUs of your products on the marketplace
 2. Updating the stock at the warehouse of the product supplier

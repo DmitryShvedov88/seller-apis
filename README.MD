@@ -26,21 +26,21 @@ These programs are designed for the average user and do not require serious know
 
 1. You need to prepare an .ENV file with the following environment variables
 The following environment variables are required for seller.py
+                            
+        CLIENT_ID - Ozon marketplace client ID.
+        SELLER_TOKEN - API - Ozon Seller key.
 
-    CLIENT_ID - Ozon marketplace client ID.
-    SELLER_TOKEN - API - Ozon Seller key.
-    
 market.py requires the following environment variables
     
-    MARKET_TOKEN — Yandex.Market API token.
-    FBS_ID — ID of the Yandex Market seller using the FBS system.
-    WAREHOUSE_FBS_ID — ID of the seller’s warehouse, according to the FBS system.
-    DBS_ID — Yandex Market seller ID using the DBS system.
-    WAREHOUSE_DBS_ID — ID of the seller’s warehouse, according to the DBS system.
+        MARKET_TOKEN — Yandex.Market API token.
+        FBS_ID — ID of the Yandex Market seller using the FBS system.
+        WAREHOUSE_FBS_ID — ID of the seller’s warehouse, according to the FBS system.
+        DBS_ID — Yandex Market seller ID using the DBS system.
+        WAREHOUSE_DBS_ID — ID of the seller’s warehouse, according to the DBS system.
 
 2. Also, to launch you will need an Excel file packed in the ostatki.zip archive. Where information about product balances is contained.
 3. Run the scripts with the following commands:
 
-    python seller.py
-    python marker.py
+        python seller.py
+        python marker.py
     

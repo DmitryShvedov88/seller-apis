@@ -29,7 +29,7 @@ The following environment variables are required for seller.py
 
     CLIENT_ID - Ozon marketplace client ID.
     SELLER_TOKEN - API - Ozon Seller key.
-
+    
 market.py requires the following environment variables
     
     MARKET_TOKEN — Yandex.Market API token.

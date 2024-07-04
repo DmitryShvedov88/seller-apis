@@ -1,41 +1,41 @@
 ## Seller-apis
-Открываем интернет магазин попродаже часов на маркет-плейсе ОЗОН на Яндекс маркете. 
-Для каждого маркетплейса предусмотрены свои файлы market.py для Яндекса, seller.py для ОЗОН.
+We are opening an online store selling watches on the OZONE marketplace on Yandex market.
+Each marketplace has its own market.py files for Yandex and seller.py for OZONE.
 
 ### seller.py
 #### Краткое описание
-Скрипт проверяет остатки на сайте интернет магазина часов фирмы Casio. Получает артикулы для маркет-плейса ОЗОН. Актуализирует остатки и номенклатуру продукции. Обновляет цены согласно предложению с сайта поставщика часов Casio, после этого выставляет цены в нашем магазине на меркет-плейсе.
+The script checks balances on the website of the Casio watch online store. Receives articles for the OZONE marketplace. Updates stock and product range. Updates prices according to the offer from the website of the Casio watch supplier, after which it sets prices in our store on the market place.
 #### Функции скрипта
-1. Получение списка артикулов ваших товаров на маркетплейсе
-2. Обновление остаков на складе поставщика товара
-3. Создает номенклатуру товаров в вашем магазине в маркетплейсе
-4. Обновляет цены на товары изходя из цен поставщиков и вашей надбавки
-5. Скрипт обрабатывает ошибки в работе сайтов и подскажет Вам при необходимости какая ошибка
+1. Obtaining a list of SKUs of your products on the marketplace
+2. Updating the stock at the warehouse of the product supplier
+3. Creates a product range in your store in the marketplace
+4. Updates product prices based on supplier prices and your markup
+5. The script processes errors in the operation of sites and will tell you, if necessary, what the error is
 
 ### market.py
 #### Краткое описани
-Этот скрипт также умеет проверять остатки на сайте Casio. Получает артикулы для маркет-плейса Яндекс Маркета. Актуализирует остатки и номенклатуру. Обновляет цены согласно предложению с сайта поставщика часов Casio, после этого выставляет цены в нашем магазине на меркет-плейсе. Однако здесь предусмотрено две модели работы: FBS и DBS. 
+This script can also check balances on the Casio website. Receives articles for the Yandex Market marketplace. Updates balances and nomenclature. Updates prices according to the offer from the website of the Casio watch supplier, after which it sets prices in our store on the market place. However, there are two operating models: FBS and DBS.
 #### Функции скрипта
-1. Получение списка артикулов ваших товаров который участвует в акции
-2. Обновление остаков на складе поставщика товара
-3. Обновляет цены на товары изходя из цен поставщиков и вашей надбавки (FBS и DBS)
-4. Скрипт обрабатывает ошибки в работе сайтов и подскажет Вам при необходимости какая ошибка
+1. Receiving a list of articles of your products that participate in the promotion
+2. Updating the stock at the warehouse of the product supplier
+3. Updates product prices based on supplier prices and your markup (FBS and DBS)
+4. The script processes errors in the operation of sites and will tell you, if necessary, what the error is
 
 #### Как использовать
-Данные программы рассчитаны на среднестатестического пользователя и не требуют серьезных знаний области программирования и информационных технологий.
+These programs are designed for the average user and do not require serious knowledge of programming and information technology.
 
-1. Вам необходимо подготовить .ENV файлик со следукющими переменными окружения
-Для seller.py необходимы следующие переменные окружения
-    CLIENT_ID - ID клиента маркетплейса Ozon
-    SELLER_TOKEN - API - ключ Ozon Seller
-Для market.py необходимы следующие переменные окружения
-    MARKET_TOKEN — API-токен Яндекс.Маркета.
-    FBS_ID — ID продавца Яндекс Маркет по системе FBS.
-    WAREHOUSE_FBS_ID — ID склада продавца, по системе FBS.
-    DBS_ID — ID продавца Яндекс Маркет по системе DBS.
-    WAREHOUSE_DBS_ID — ID склада продавца, по системе DBS.
+1. You need to prepare an .ENV file with the following environment variables
+The following environment variables are required for seller.py
+    CLIENT_ID - Ozon marketplace client ID
+    SELLER_TOKEN - API - Ozon Seller key
+market.py requires the following environment variables
+    MARKET_TOKEN — Yandex.Market API token.
+    FBS_ID — ID of the Yandex Market seller using the FBS system.
+    WAREHOUSE_FBS_ID — ID of the seller’s warehouse, according to the FBS system.
+    DBS_ID — Yandex Market seller ID using the DBS system.
+    WAREHOUSE_DBS_ID — ID of the seller’s warehouse, according to the DBS system.
 
-2. Также для запуска Вам понадобится Эксель файл упакованный в архив ostatki.zip. Где содержатся данные об остатках товара.
-3. Запускаем скрипты следующими командами:
+2. Also, to launch you will need an Excel file packed in the ostatki.zip archive. Where information about product balances is contained.
+3. Run the scripts with the following commands:
     python seller.py
     python marker.py
